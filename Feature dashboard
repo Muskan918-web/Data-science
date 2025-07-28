@@ -1,0 +1,33 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import os
+
+# Load dataset
+df = sns.load_dataset("iris")  # You can replace this with your dataset (e.g., pd.read_csv("your_data.csv"))
+
+# Create output directory for plots
+output_dir = "plots"
+os.makedirs(output_dir, exist_ok=True)
+
+# Histograms for each numeric column
+for col in df.select_dtypes(include='number').columns:
+    plt.figure()
+    sns.histplot(df[col], kde=True)
+    plt.title(f"Histogram of {col}")
+    plt.savefig(os.path.join(output_dir, f"{col}_histogram.png"))
+    plt.close()
+
+# Scatter plots for each pair of numerical features
+numeric_cols = df.select_dtypes(include='number').columns
+
+for i in range(len(numeric_cols)):
+    for j in range(i + 1, len(numeric_cols)):
+        x, y = numeric_cols[i], numeric_cols[j]
+        plt.figure()
+        sns.scatterplot(data=df, x=x, y=y, hue=df.columns[-1] if 'species' in df.columns else None)
+        plt.title(f"{y} vs {x}")
+        plt.savefig(os.path.join(output_dir, f"{y}_vs_{x}_scatter.png"))
+        plt.close()
+
+print(f"Plots saved to '{output_dir}' folder.")
