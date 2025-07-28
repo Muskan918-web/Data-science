@@ -1,0 +1,26 @@
+import pandas as pd
+
+# Load the dataset
+df = pd.read_csv("data.csv")  # Replace with your actual filename
+
+# Display initial info
+print("Initial dataset shape:", df.shape)
+
+# Remove rows with missing values
+df_cleaned = df.dropna()
+
+# Display info after cleaning
+print("After dropping missing values:", df_cleaned.shape)
+
+# Calculate average (mean) for numeric columns
+average_values = df_cleaned.mean(numeric_only=True)
+
+# Display the averages
+print("\nAverage values per column:")
+print(average_values)
+
+# Optional: Save cleaned data and summary
+df_cleaned.to_csv("cleaned_data.csv", index=False)
+average_values.to_csv("average_summary.csv")
+
+print("\nCleaned data and summary saved.")
