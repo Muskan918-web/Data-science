@@ -1,0 +1,14 @@
+# Sample list of daily temperatures in Celsius
+temperatures = [22.5, 23.0, 21.8, 24.1, 22.2, 23.5, 21.9]
+
+# Calculate the total of all temperatures
+total_temp = sum(temperatures)
+
+# Count the number of temperature readings
+num_readings = len(temperatures)
+
+# Calculate the average temperature
+average_temp = total_temp / num_readings
+
+# Output the result
+print(f"The average temperature is {average_temp:.2f}°C")
