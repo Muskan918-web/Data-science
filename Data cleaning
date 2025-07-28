@@ -1,0 +1,24 @@
+import pandas as pd
+
+# Load data from CSV
+df = pd.read_csv("data.csv")  # Replace with your file path
+
+# Display original shape
+print("Original data shape:", df.shape)
+
+# Remove duplicate rows
+df_cleaned = df.drop_duplicates()
+print("After removing duplicates:", df_cleaned.shape)
+
+# Handle missing values (drop rows with any missing value)
+df_cleaned = df_cleaned.dropna()
+print("After dropping rows with missing values:", df_cleaned.shape)
+
+# Filter data: example - keep only rows where 'age' > 18
+if 'age' in df_cleaned.columns:
+    df_cleaned = df_cleaned[df_cleaned['age'] > 18]
+    print("After filtering by age > 18:", df_cleaned.shape)
+
+# Save cleaned data
+df_cleaned.to_csv("cleaned_data.csv", index=False)
+print("Cleaned data saved to 'cleaned_data.csv'")
